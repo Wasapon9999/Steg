@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 # อัปเกรด pip ก่อนติดตั้งแพ็กเกจ
 RUN python -m pip install --upgrade pip
-COPY requirements.txt .
+COPY requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ตั้งค่า environment variables
