@@ -4,7 +4,7 @@ FROM python:3.10-slim
 WORKDIR /app
 COPY . .
 
-# ติดตั้ง dependencies ของระบบที่จำเป็น
+# ติดตั้ง dependencies ของระบบก่อน
 RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install -y \
     binwalk \
     && rm -rf /var/lib/apt/lists/*
 
-# อัปเกรด pip และติดตั้ง dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# อัปเกรด pip ก่อนติดตั้งแพ็กเกจ
+RUN python -m pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
 # ตั้งค่า environment variables
 ENV FLASK_APP=app.py
