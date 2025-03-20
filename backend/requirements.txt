@@ -1,3 +1,5 @@
-Pillow==10.3.0
-numpy==1.22.0
-pymongo==4.6.3
+Flask==2.3.2
+Flask-PyMongo==2.3.0
+Flask-Babel==3.1.0
+Werkzeug==2.2.3  
+Babel==2.12.1 
