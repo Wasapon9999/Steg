@@ -1,35 +1,9 @@
-# ใช้ Python เวอร์ชันที่รองรับ
-FROM python:3.10-slim
-
+FROM python:3.10.11-slim-bullseye
 WORKDIR /app
 COPY . .
-
-# ติดตั้ง dependencies ของระบบที่จำเป็น
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
-    libssl-dev \
-    libffi-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    libjpeg-dev \
-    libpng-dev \
-    zlib1g-dev \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
-    exiftool \
-    binwalk \
-    && rm -rf /var/lib/apt/lists/*
-
-# อัปเกรด pip และติดตั้ง dependencies
-RUN python -m pip install --upgrade pip setuptools wheel
-RUN pip install --no-cache-dir -r requirements.txt
-
-# ตั้งค่า environment variables
-ENV FLASK_APP=app.py
+ENV FLASK_APP=web.app
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=production
-
+ENV FLASK_ENV=development
+RUN pip install -r requirements.txt
 EXPOSE 5000
-
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["flask", "run"]
