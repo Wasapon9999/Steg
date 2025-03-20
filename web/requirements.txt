@@ -1,5 +1,7 @@
 Flask==2.3.2
 Flask-PyMongo==2.3.0
-Flask-Babel==3.1.0  # ใช้เวอร์ชันใหม่กว่า
-Werkzeug==2.2.3  # ลดเวอร์ชันลงให้รองรับกัน
-Babel==2.12.1  # ติดตั้ง Babel ด้วย
+Flask-Babel==3.1.0
+Werkzeug==2.2.3
+Babel==2.12.1
+setuptools>=58.0.0
+wheel>=0.37.0
