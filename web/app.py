@@ -20,10 +20,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGODB_USERNAME']
-app.config["MONGO_URI"] += ':' + os.environ['MONGODB_PASSWORD']
-app.config["MONGO_URI"] += '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/'
-app.config["MONGO_URI"] += os.environ['MONGODB_DATABASE']
+app.config["MONGO_URI"] = os.environ['MONGO_URI']
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 Mb max
 app.config['LANGUAGES'] = {
     'en': 'English',
