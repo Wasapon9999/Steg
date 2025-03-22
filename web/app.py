@@ -95,22 +95,7 @@ def upload_image():
 
 @app.route('/')
 def home():
-    index_data = {
-        "what": "What is this?",
-        "description": "Aperi'Solve is an online platform which performs layer analysis on images.",
-        "selectfile": "Select a file to analyze",
-        "selectimage": "Select Image",
-        "submit": "Submit",
-        "zsteg": {
-            "extract": "Extract zsteg files (--extract)?",
-            "options": "Test all options of zsteg (--all)?"
-        },
-        "enable": "Enable",
-        "disable": "Disable",
-        "gotpass": "I've got a password!",
-        "password": "Password"
-    }
-    return render_template('index.html', index=index_data)
+    return "This is home page"
 
 
 if __name__ == '__main__':
