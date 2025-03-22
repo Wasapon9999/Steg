@@ -93,9 +93,24 @@ def upload_image():
     return jsonify({"Success": "File uploaded", "File": hash_file}), 200
 
 
-@app.route('/static/<path:path>')
-def send_js(path):
-    return send_from_directory('static', path)
+@app.route('/')
+def home():
+    index_data = {
+        "what": "What is this?",
+        "description": "Aperi'Solve is an online platform which performs layer analysis on images.",
+        "selectfile": "Select a file to analyze",
+        "selectimage": "Select Image",
+        "submit": "Submit",
+        "zsteg": {
+            "extract": "Extract zsteg files (--extract)?",
+            "options": "Test all options of zsteg (--all)?"
+        },
+        "enable": "Enable",
+        "disable": "Disable",
+        "gotpass": "I've got a password!",
+        "password": "Password"
+    }
+    return render_template('index.html', index=index_data)
 
 
 if __name__ == '__main__':
