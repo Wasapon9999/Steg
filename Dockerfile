@@ -3,9 +3,9 @@ FROM python:3.10.11-slim-bullseye
 
 # ตั้งค่าที่ทำงานใน Container
 WORKDIR /app
+# คัดลอกไฟล์ทั้งหมด รวมถึงโฟลเดอร์ `web/language/`
+COPY . /app
 
-# คัดลอกไฟล์ทั้งหมดเข้าไปใน Container
-COPY . .
 
 # กำหนด Environment Variables ให้ Flask รู้จักแอป
 ENV FLASK_APP=web.app
