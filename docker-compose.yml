@@ -1,48 +1,46 @@
+version: '3.8'
+
 services:
   web:
     image: ghcr.io/zeecka/aperisolve-web:latest
     container_name: aperisolve_web
-    volumes:
-      - aperisolve-data:/app/static/uploads
     ports:
       - "5000:5000"
     env_file:
       - .env
-    depends_on:
-      - mongodb
     networks:
-      - frontend
       - backend
+    depends_on:
+      - backend
+      - mongodb
+
   backend:
     image: ghcr.io/zeecka/aperisolve-backend:latest
     container_name: aperisolve_back
-    volumes:
-      - aperisolve-data:/app/uploads
+    ports:
+      - "5001:5001"
     env_file:
       - .env
-    depends_on:
-      - mongodb
     networks:
       - backend
+    depends_on:
+      - mongodb
+
   mongodb:
     image: mongo:4.0.8
     container_name: mongodb
     restart: unless-stopped
-    command: mongod --auth
+    command: mongod --auth --bind_ip_all
     env_file:
       - .env
-    volumes:
-      - aperisolve-db:/data/db
-      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
-  frontend:
-    driver: bridge
   backend:
     driver: bridge
-volumes:
-  aperisolve-data: # All uploads will be stored in this volume
-  aperisolve-db: # All mongo db related data will be stored in this volume
-  
