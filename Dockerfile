@@ -25,4 +25,5 @@ ENV FLASK_ENV=production
 EXPOSE 5000
 
 # รันแอป Flask ด้วย Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "web.app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "web.app:app"]
+
