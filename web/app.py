@@ -18,12 +18,16 @@ from flask import Flask, render_template, request, jsonify, \
     send_from_directory, redirect, url_for, make_response, Response
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
+
+load_dotenv()  # โหลดค่าจาก .env ถ้ามี
+
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGODB_USERNAME']
 app.config["MONGO_URI"] += ':' + os.environ['MONGODB_PASSWORD']
 app.config["MONGO_URI"] += '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/'
-app.config["MONGO_URI"] += os.environ['MONGODB_DATABASE']
+app.config["MONGO_URI"] += os.getenv('MONGODB_DATABASE', 'flaskdb')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 Mb max
 app.config['LANGUAGES'] = {
     'en': 'English',
