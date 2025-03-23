@@ -21,8 +21,13 @@ from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
 load_dotenv()  # โหลดค่าจาก .env ถ้ามี
-
-
+LANGUAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "language")
+if os.path.exists(LANGUAGE_DIR):
+    print(f"✅ language directory exists: {LANGUAGE_DIR}")
+    print(f"📂 Files in language/: {os.listdir(LANGUAGE_DIR)}")
+else:
+    print("❌ language directory NOT FOUND!")
+    
 app = Flask(__name__)
 app.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGODB_USERNAME']
 app.config["MONGO_URI"] += ':' + os.environ['MONGODB_PASSWORD']
