@@ -10,16 +10,15 @@ from bson.objectid import ObjectId
 from waitress import serve
 
 app = Flask(__name__)
-
-# แก้ไขให้ใช้ os.environ.get() ป้องกัน KeyError
-MONGO_USERNAME = os.environ.get("MONGODB_USERNAME", "default_user")
-MONGO_PASSWORD = os.environ.get("MONGODB_PASSWORD", "default_password")
-MONGO_HOSTNAME = os.environ.get("MONGODB_HOSTNAME", "localhost")
-MONGO_DATABASE = os.environ.get("MONGODB_DATABASE", "testdb")
-
-app.config["MONGO_URI"] = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOSTNAME}:27017/{MONGO_DATABASE}'
+app.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGODB_USERNAME']
+app.config["MONGO_URI"] += ':' + os.environ['MONGODB_PASSWORD']
+app.config["MONGO_URI"] += '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/'
+app.config["MONGO_URI"] += os.environ['MONGODB_DATABASE']
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 Mb max
-app.config['LANGUAGES'] = {'en': 'English', 'fr': 'Français'}
+app.config['LANGUAGES'] = {
+    'en': 'English',
+    'fr': 'Français'
+}
 
 mongo = PyMongo(app)
 db = mongo.db
