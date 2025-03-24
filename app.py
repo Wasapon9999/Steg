@@ -300,7 +300,6 @@ def change_lang(lang=None):
 def send_js(path):
     return send_from_directory('static', path)
 
-from waitress import serve
 
 if __name__ == '__main__':
-    serve(app, host="0.0.0.0", port=5000)
+    app.run('0.0.0.0', port=5000)
