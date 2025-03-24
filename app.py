@@ -33,7 +33,14 @@ app.config['LANGUAGES'] = {
 mongo = PyMongo(app)
 db = mongo.db
 
-UPLOAD_FOLDER = 'static/upload'
+UPLOAD_FOLDER = "/app/uploads"
+
+# ตรวจสอบและสร้างโฟลเดอร์หากไม่มี
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# ตั้งค่าให้ Flask ใช้งานโฟลเดอร์นี้
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = ["jpeg", "png", "bmp",
                       "gif", "tiff", "jpg", "jfif", "jpe", "tif"]
 
