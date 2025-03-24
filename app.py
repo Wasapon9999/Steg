@@ -33,7 +33,7 @@ app.config['LANGUAGES'] = {
 mongo = PyMongo(app)
 db = mongo.db
 
-UPLOAD_FOLDER = 'static/images'
+UPLOAD_FOLDER = 'static/upload'
 ALLOWED_EXTENSIONS = ["jpeg", "png", "bmp",
                       "gif", "tiff", "jpg", "jfif", "jpe", "tif"]
 
